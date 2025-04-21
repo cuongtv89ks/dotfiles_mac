@@ -1,0 +1,7 @@
+[manager]
+
+prepend_keymap = [
+	{ on = [ "g", "D" ],       run = "cd ~/Library/CloudStorage/OneDrive-Personal/Downloads",   desc = "Go OneDownloads" },
+	{ on = [ "g", "o" ],       run = "cd ~/Library/CloudStorage/OneDrive-Personal",   desc = "Go OneDrive" },
+	{ on = [ "g", "l" ],       run = "cd ~/Library",   desc = "Go Library" },
+]
