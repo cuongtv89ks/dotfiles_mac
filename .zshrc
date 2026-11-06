@@ -28,6 +28,9 @@ zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 
 # Add in snippets
+# OMZ plugins (e.g. docker) write completions here; Oh My Zsh normally creates it, zinit doesn't
+mkdir -p "$ZSH_CACHE_DIR/completions"
+fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 # zinit snippet OMZP::tmuxinator
@@ -358,8 +361,18 @@ source <(fzf --zsh)
 # Tmuxifier config for zsh plugins  
 # eval "$(tmuxifier init -)"
 
-alias sshn8n='ssh -t cuongtv@192.168.0.106 "tmux new-session -A -s n8n"'
-alias sshn8np='ssh -t cuongtv@39.123.27.64 "tmux new-session -A -s n8n"'
+alias sshcuongtv='ssh -t cuongtv@192.168.0.106 "tmux new-session -A -s cuongtv"'
+alias sshcuongtvp='ssh -t cuongtv-server "tmux new-session -A -s cuongtv"'
+
+alias sshsoul='ssh -t soul@192.168.0.101 "tmux new-session -A -s soul"'
+alias sshsoulp='ssh -t soul-server "tmux new-session -A -s soul"'
+
+alias sshvietc='ssh -t vietc@192.168.0.199 "tmux new-session -A -s vietc"'
+alias sshvietcp='ssh -t vietc-server "tmux new-session -A -s vietc"'
+
+alias sshllm='ssh -t llm@192.168.0.110 "tmux new-session -A -s llm"'
+alias sshllmp='ssh -t llm-server "tmux new-session -A -s llm"'
+
 
 export YAZI_CONFIG_HOME="~/.config/yazi"
 
@@ -370,3 +383,48 @@ export $(cat ~/.env | xargs)
 
 alias dotfile_mac='/usr/bin/git --git-dir=$HOME/.dotfiles_mac/ --work-tree=$HOME'
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:/opt/homebrew/share/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+
+export PKG_CONFIG_PATH="/opt/homebrew/opt/protobuf/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+source ~/miniconda3/bin/activate
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:/Users/cuongtv20/go/bin"
+export PROJECT_ID=$(gcloud config get project)
+alias vim='nvim'
+export EDITOR=nvim
+
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
+export PATH="$PATH:$JAVA_HOME/bin"
+
+export ANDROID_HOME="/Users/cuongtv20/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/tools/bin"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export PATH="/opt/homebrew/opt/libxslt/bin:$PATH"
+export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/cuongtv20/.antigravity/antigravity/bin:$PATH"
+
+export PATH="$HOME/bin:$PATH"
+
+# Added by Antigravity IDE
+export PATH="/Users/cuongtv20/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# Added by Antigravity IDE
+export PATH="/Users/cuongtv20/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# Added by codebase-memory-mcp install
+export PATH="/Users/cuongtv20/.local/bin:$PATH"
+
+# TinyTeX (ai-job-search: lualatex/xelatex)
+export PATH="$HOME/Library/TinyTeX/bin/universal-darwin:$PATH"
