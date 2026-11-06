@@ -362,16 +362,26 @@ source <(fzf --zsh)
 # eval "$(tmuxifier init -)"
 
 alias sshcuongtv='ssh -t cuongtv@192.168.0.106 "tmux new-session -A -s cuongtv"'
-alias sshcuongtvp='ssh -t cuongtv-server "tmux new-session -A -s cuongtv"'
+alias sshcuongtvp='ssh -t docker-106 "tmux new-session -A -s cuongtv"'
 
 alias sshsoul='ssh -t soul@192.168.0.101 "tmux new-session -A -s soul"'
-alias sshsoulp='ssh -t soul-server "tmux new-session -A -s soul"'
+alias sshsoulp='ssh -t dev-101 "tmux new-session -A -s soul"'
 
 alias sshvietc='ssh -t vietc@192.168.0.199 "tmux new-session -A -s vietc"'
-alias sshvietcp='ssh -t vietc-server "tmux new-session -A -s vietc"'
+alias sshvietcp='ssh -t win-199 "tmux new-session -A -s vietc"'
 
 alias sshllm='ssh -t llm@192.168.0.110 "tmux new-session -A -s llm"'
-alias sshllmp='ssh -t llm-server "tmux new-session -A -s llm"'
+alias sshllmp='ssh -t llm-110 "tmux new-session -A -s llm"'
+
+# The "p" aliases above reach the home lab over Tailscale (hosts in ~/.ssh/config); this Mac runs
+# tailscaled in userspace mode, so the CLI needs its socket.
+[[ $OSTYPE == darwin* ]] && alias tailscale='/opt/homebrew/bin/tailscale --socket=$HOME/.local/state/tailscale/tailscaled.sock'
+
+# RDP to .199 from anywhere: Windows App -> localhost:13389 -> SSH tunnel over Tailscale -> win-199:3389.
+rdp199() {
+  nc -z localhost 13389 2>/dev/null || ssh -fN -o ExitOnForwardFailure=yes -L 13389:localhost:3389 win-199 || return
+  open -a "Windows App" "$HOME/.local/share/rdp/win-199.rdp"
+}
 
 
 export YAZI_CONFIG_HOME="~/.config/yazi"
